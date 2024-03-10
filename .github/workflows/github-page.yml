@@ -39,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Generate documentation
-        run: npm run build-prod
+        run: npm run build-ghpage
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
