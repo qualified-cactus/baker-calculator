@@ -56,6 +56,7 @@ module.exports = {
             title: "Baker's Calculator",
             favicon: "src/favicon.svg",
             filename: "index.html",
+            template: "src/index.html",
             meta: {
                 "Content-Security-Policy": {
                     "http-equiv": "Content-Security-Policy",
