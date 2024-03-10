@@ -26,8 +26,7 @@ export function FormulaListPage(): ReactElement {
     useEffect(() => {
         setFormulaList(null)
         loading("", async () => {
-            setFormulaList(new Array(100).fill((await formulaDao.getFormulaList(sortBy))[0]))
-            // setFormulaList(await formulaDao.getFormulaList(sortBy))
+            setFormulaList(await formulaDao.getFormulaList(sortBy))
         })
     }, [sortBy])
 

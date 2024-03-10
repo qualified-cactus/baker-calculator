@@ -1,4 +1,4 @@
-const pathPrefix = "/baker-calculator";
+const pathPrefix = "/app";
 
 function query(key: string, value?: string) {
 
@@ -8,7 +8,7 @@ function query(key: string, value?: string) {
 
 
 export let Paths = Object.freeze({
-    HOME_PAGE: `${pathPrefix}/`,
+    HOME_PAGE: pathPrefix,
     FORMULA_LIST: `${pathPrefix}/formula`,
     FORMULA_DETAIL: (formulaId: string, resultId?: string) =>
         `${pathPrefix}/formula/${formulaId}?${query("resultId", resultId)}`,

@@ -2,11 +2,11 @@
     "name": "Baker's Calculator",
     "icons": [
         {
-            "src": "/baker-calculator/favicon.svg",
+            "src": "/favicon.svg",
             "sizes": "any",
             "types": "image/svg+xml"
         }
     ],
-    "start_url": "/baker-calculator",
+    "start_url": "/app",
     "display": "standalone"
 }
