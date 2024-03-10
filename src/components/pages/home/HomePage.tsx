@@ -4,7 +4,7 @@ import { LoadingCover } from "../../LoadingCover";
 import { AppDatabase } from "../../../DbProvider";
 import { Column } from "../../common/columnAndRows";
 import { Card, CardHeader } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink, useNavigate, useSearchParams } from "react-router-dom"
 import { Paths } from "../../../Paths";
 import { useMainLayoutCtx } from "../../MainLayout";
 import { AppUiText } from "../../AppUiText";
@@ -14,23 +14,38 @@ export function HomePage(): ReactElement {
     const formulaDao = AppDatabase.getInstance().formulaDao
     const layoutCtx = useMainLayoutCtx()
     const uiText = AppUiText.useCtx().text.home
+    const [searchParams, _] = useSearchParams()
+    const navigate = useNavigate()
+
     // states
-    const [savedResults, setSavedResults] = useState<SavedResultWithFormula[] | null>(null)
+    const [savedResults, setSavedResults] = useState<SavedResultWithFormula[] | undefined>(undefined)
 
     // effects
     useEffect(() => {
-        setSavedResults(null)
+        // gh 404 support
+        const redirect = searchParams.get("redirect")
+        if (redirect !== null) {
+            navigate(redirect, {replace: true})
+            return
+        }
+
+        setSavedResults(undefined)
         loading("", async () => {
             setSavedResults(await formulaDao.getAllSavedResult())
         })
-    }, [])
+    }, [searchParams])
     
     useEffect(() => {
         layoutCtx.setTitle(uiText.pageTitle)
     }, [uiText])
 
+    
+    useEffect(()=>{
+        
+    },[searchParams])
 
-    if (savedResults === null) {
+
+    if (savedResults === undefined) {
         return <></>
     }
 

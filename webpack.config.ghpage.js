@@ -6,8 +6,6 @@ const commonConfig = require("./webpack.config.common")
 
 
 
-const pluginsToUse = commonConfig.plugins.filter((plugin)=> !(plugin instanceof HtmlWebpackPlugin))
-
 module.exports = {
     ...commonConfig,
     mode: "production",
@@ -18,23 +16,9 @@ module.exports = {
     output: {
         ...commonConfig.output,
         path: path.resolve(__dirname, 'gh-dist'),
-        publicPath: "/baker-calculator/"
     },
     plugins: [
-        ...pluginsToUse,
-        new HtmlWebpackPlugin({
-            title: "Baker's Calculator",
-            filename: "index.html",
-            favicon: "src/favicon.svg",
-            template: "./ghpage-src/ghpage-index.ejs",
-            meta: {
-                "Content-Security-Policy": {
-                    "http-equiv": "Content-Security-Policy",
-                    "content": "default-src 'self' ; img-src 'self' blob: ; style-src 'self' 'unsafe-inline'"
-                },
-            },
-            chunks: ["main"],
-        }),
+        ...commonConfig.plugins,
         new HtmlWebpackPlugin({
             filename: "404.html",
             meta: {
@@ -45,10 +29,5 @@ module.exports = {
             },
             chunks: ["ghNotfound"],
         }),
-        new CopyPlugin({
-            patterns: [
-                {from: "ghpage-src/ghpage-manifest.json"}
-            ]
-        })
     ]
 }
