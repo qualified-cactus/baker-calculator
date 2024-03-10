@@ -1,0 +1,6 @@
+{
+    "name": "Baker's Calculator",
+    "icons": [],
+    "start_url": "/baker-calculator",
+    "display": "standalone"
+}

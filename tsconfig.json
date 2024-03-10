@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "target": "ESNext",
+        "jsxImportSource": "@emotion/react",
+        "module": "ESNext",
+        "moduleResolution": "Bundler"
+    },
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "include": [
+        "src/**/*",
+        "ghpage-src/**/*"
+    ],
+}
