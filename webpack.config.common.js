@@ -53,6 +53,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: "Baker's Calculator",
+            favicon: "src/favicon.svg",
             filename: "index.html",
             meta: {
                 "Content-Security-Policy": {

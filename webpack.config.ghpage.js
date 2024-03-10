@@ -25,6 +25,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Baker's Calculator",
             filename: "index.html",
+            favicon: "src/favicon.svg",
             template: "./ghpage-src/ghpage-index.ejs",
             meta: {
                 "Content-Security-Policy": {
