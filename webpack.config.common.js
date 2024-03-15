@@ -1,16 +1,16 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     entry: {
-        main: './src/index.tsx',
+        main: './src/index',
+        serviceWorker: "./src/serviceworker/serviceWorker"
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[fullhash].bundle.js',
+        filename: (pathdata)=>  pathdata.chunk.name === "serviceWorker" ? "[name].js" : "[name].[contenthash].js",
         publicPath: "/",
         clean: true,
         assetModuleFilename: "assets/[name][hash][ext]",
@@ -65,10 +65,10 @@ module.exports = {
             },
             chunks: ["main"],
         }),
-        new WorkboxPlugin.GenerateSW({
-            clientsClaim: true,
-            skipWaiting: true,
-        }),
+        // new WorkboxPlugin.GenerateSW({
+        //     clientsClaim: true,
+        //     skipWaiting: true,
+        // }),
         new CopyPlugin({
             patterns: [
                 { from: "src/manifest.json" }

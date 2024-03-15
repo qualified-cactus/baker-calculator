@@ -2,12 +2,12 @@ import { Box, Button, IconButton, Paper, TextField, Typography } from "@mui/mate
 import React, { ReactElement, useState } from "react";
 import { AppUiText } from "../../AppUiText";
 import { DefaultMassUnit, DefaultVolumeUnit, MassUnit, UnitType, VolumeUnit } from "../../../data/Measurement";
-import { DragableList } from "../../common/DraggableList";
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import { FormulaCreationInputByAmount } from "../../../data/FormulaRepo";
 import { UnitSelector } from "../../common/unitSelectors";
 import { CreateFormulaFormProps, TextFieldChangeEvent, toBaseUnit } from "./CreateFormulaPage";
+import { Column, Row } from "../../common/columnAndRows";
 
 
 
@@ -83,24 +83,6 @@ export function CreateFormulaByAmountForm({
     };
     const onRemoveOtherIngredient = (index: number) => () => {
         setOtherIngredients(otherIngredients.toSpliced(index, 1));
-    };
-    const onSwitchOtherIngredientsIndex = (fromIndex: number, toIndex: number) => {
-        let i1: number;
-        let i2: number;
-        if (fromIndex <= toIndex) {
-            i1 = fromIndex;
-            i2 = toIndex;
-        } else {
-            i1 = toIndex;
-            i2 = fromIndex;
-        }
-        setOtherIngredients([
-            ...otherIngredients.slice(0, i1),
-            otherIngredients[i2],
-            ...otherIngredients.slice(i1 + 1, i2),
-            otherIngredients[i1],
-            ...otherIngredients.slice(i2 + 1)
-        ]);
     };
     const onChangeOtherIngredientName = (index: number) => (e: TextFieldChangeEvent) => {
         setOtherIngredients(otherIngredients.toSpliced(
@@ -194,18 +176,9 @@ export function CreateFormulaByAmountForm({
             <Typography variant="body1">
                 {uiText.otherIngredients}
             </Typography>
-            <DragableList
-                items={otherIngredients}
-                onSwitch={onSwitchOtherIngredientsIndex}
-            >
-                {(ingredient, i) => <Box sx={(theme) => ({ display: "flex", gap: theme.spacing(1), alignItems: "center" })}>
-                    <Box sx={(theme) => ({
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "stretch",
-                        gap: theme.spacing(1),
-                        width: "100%"
-                    })}>
+            {otherIngredients.map((ingredient, i) =>
+                <Row key={i} spacing={1} sx={{alignItems: "center"}}>
+                    <Column spacing={1} sx={{ flexGrow: 1, alignItems: "stretch"}}>
                         <TextField required size="small" multiline
                             label={uiText.ingredient}
                             value={ingredient.name}
@@ -223,14 +196,14 @@ export function CreateFormulaByAmountForm({
                             volumeUnit={ingredient.volumeUnit}
                             onChangeVolumeUnit={onChangeOtherIngredientVolumeUnit(i)}
                             size="small" />
-                    </Box>
+                    </Column>
                     <div>
                         <IconButton onClick={onRemoveOtherIngredient(i)} type="button" size="small">
                             <ClearIcon />
                         </IconButton>
                     </div>
-                </Box>}
-            </DragableList>
+                </Row>
+            )}
             <div>
                 <Button variant="contained" size="small" type="button" onClick={onAddOtherIngredient}>
                     <AddIcon />
