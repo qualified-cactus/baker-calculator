@@ -175,9 +175,9 @@ export function MainLayout(): ReactElement {
             }
             <Container maxWidth="sm" sx={(theme) => ({
                 paddingTop: theme.spacing(3),
+                paddingBottom: theme.spacing(1),
                 position: "relative",
                 display: "flex", flexDirection: "column",
-                height: "100vh"
             })}>
                 <Toolbar />
                 <LayOutContext.Provider value={layoutContext}>

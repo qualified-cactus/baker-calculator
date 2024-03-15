@@ -2,12 +2,12 @@ import { Box, Button, IconButton, Paper, TextField, Typography } from "@mui/mate
 import React, { useState } from "react";
 import { AppUiText } from "../../AppUiText";
 import { DefaultMassUnit, DefaultVolumeUnit, MassUnit, UnitType, VolumeUnit } from "../../../data/Measurement";
-import { DragableList } from "../../common/DraggableList";
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import { FormulaCreationInputByRatio } from "../../../data/FormulaRepo";
 import { UnitSelector } from "../../common/unitSelectors";
 import { CreateFormulaFormProps, TextFieldChangeEvent, toBaseUnit } from "./CreateFormulaPage";
+import { Column, Row } from "../../common/columnAndRows";
 
 /**
  * Form shared by "create formula" page and "edit formula" page.
@@ -184,19 +184,11 @@ export function CreateFormulaByRatioForm({
             <Typography variant="body1">
                 {uiText.otherIngredients}
             </Typography>
-            <DragableList
-                items={otherIngredients}
-                onSwitch={onSwitchOtherIngredientsIndex}
-            >
-                {(ingredient, i) => <Box sx={(theme) => ({ display: "flex", gap: theme.spacing(1), alignItems: "center" })}>
-                    <Box sx={(theme) => ({
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "stretch",
-                        gap: theme.spacing(1),
-                        width: "100%"
-                    })}>
-                        <TextField required size="small" multiline
+
+            {otherIngredients.map((ingredient, i) =>
+                <Row key={i} spacing={1} sx={{alignItems: "center"}}>
+                    <Column spacing={1} sx={{ flexGrow: 1, alignItems: "stretch"}}>
+                    <TextField required size="small" multiline
                             label={uiText.ingredient}
                             value={ingredient.name}
                             onChange={onChangeOtherIngredientName(i)} />
@@ -213,14 +205,14 @@ export function CreateFormulaByRatioForm({
                             volumeUnit={ingredient.volumeUnit}
                             onChangeVolumeUnit={onChangeOtherIngredientVolumeUnit(i)}
                             size="small" />
-                    </Box>
+                    </Column>
                     <div>
                         <IconButton onClick={onRemoveOtherIngredient(i)} type="button" size="small">
                             <ClearIcon />
                         </IconButton>
                     </div>
-                </Box>}
-            </DragableList>
+                </Row>
+            )}
             <div>
                 <Button variant="contained" size="small" type="button" onClick={onAddOtherIngredient}>
                     <AddIcon />

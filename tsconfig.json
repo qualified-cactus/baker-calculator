@@ -6,7 +6,9 @@
         "target": "ESNext",
         "jsxImportSource": "@emotion/react",
         "module": "ESNext",
-        "moduleResolution": "Bundler"
+        "moduleResolution": "Bundler",
+        "lib": ["WebWorker", "ESNext", "DOM"],
+        "isolatedModules": true
     },
     "extends": "@tsconfig/recommended/tsconfig.json",
     "include": [

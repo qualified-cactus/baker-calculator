@@ -80,7 +80,7 @@ export function FormulaListPage(): ReactElement {
 
         </Row>
         <Column spacing={2} sx={(theme) => ({
-            flexGrow: 1, overflow: "scroll",
+            flexGrow: 1,
             alignItems: "stretch", paddingX: theme.spacing(0.5)
         })}>
             {formulaList && formulaList.map((formula, i) => {

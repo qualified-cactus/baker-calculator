@@ -7,14 +7,14 @@ import '@fontsource/roboto/700.css'
 import { AppDatabase } from "./DbProvider"
 
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(registration => {
-            console.log('SW registered: ', registration);
-        }).catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
-        });
-    });
+
+if ('serviceWorker' in window.navigator) {
+    window.addEventListener("load", () => {
+        window.navigator.serviceWorker
+            .register("/serviceWorker.js")
+            .then((result) => console.log(result))
+            .catch(e => console.error(e))
+    })
 }
 
 window.document.body.style.margin = "0"
