@@ -3,8 +3,16 @@
 export type { };
 declare const self: ServiceWorkerGlobalScope;
 
-const CACHE_NAME = "v1"
+const CACHE_NAME = "v2"
 
+async function clearOldCache() {
+    const storedCacheNames = await self.caches.keys()
+    for (const storedCacheName of storedCacheNames) {
+        if (storedCacheName !== CACHE_NAME) {
+            await self.caches.delete(storedCacheName)
+        }
+    }
+}
 
 async function retrieveResponse(request: Request): Promise<Response> {
     const cachedResponse = await self.caches.match(request, { cacheName: CACHE_NAME })
@@ -25,6 +33,12 @@ async function retrieveResponse(request: Request): Promise<Response> {
         });
     }
 }
+
+
+
+self.addEventListener("install", (event: ExtendableEvent)=>{
+    event.waitUntil(clearOldCache())
+})
 
 self.addEventListener("fetch", (event: FetchEvent) => {
     event.respondWith(retrieveResponse(event.request))

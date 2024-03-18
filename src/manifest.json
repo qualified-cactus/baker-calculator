@@ -5,8 +5,14 @@
             "src": "/favicon.svg",
             "sizes": "any",
             "types": "image/svg+xml"
+        },
+        {
+            "src": "/assets/favicon_512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ],
-    "start_url": "/app",
+    "start_url": "/",
     "display": "standalone"
 }

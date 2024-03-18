@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import { AppDatabase } from "./DbProvider"
-
+import "./favicon_512x512.png"
 
 
 if ('serviceWorker' in window.navigator) {
