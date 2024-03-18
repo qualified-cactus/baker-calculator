@@ -22,7 +22,7 @@ export function CreateFormulaByAmountForm({
     const [formulaName, setFormulaName] = useState<string>(initialState?.name ?? "");
     const [formulaNote, setFormulaNote] = useState<string>(initialState?.note ?? "");
 
-    const [baseIngredientName, setBaseIngredientName] = useState<string>(initialState?.name ?? "");
+    const [baseIngredientName, setBaseIngredientName] = useState<string>(initialState?.baseIngredient.name ?? "");
     const [baseIngredientAmount, setBaseIngredientAmount] = useState<string>(initialState?.baseIngredient.amount?.toString() ?? "0");
     const [baseIngredientUnitType, setBaseIngredientUnitType] = useState<UnitType>(initialState?.baseIngredient.unitType ?? "mass");
     const [baseIngredientMassUnit, setBaseIngredientMassUnit] = useState<MassUnit>(() => (initialState && initialState.baseIngredient.unitType === "mass") ?
