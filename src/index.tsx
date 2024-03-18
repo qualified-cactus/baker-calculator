@@ -11,7 +11,7 @@ import "./favicon_512x512.png"
 if ('serviceWorker' in window.navigator) {
     window.addEventListener("load", () => {
         window.navigator.serviceWorker
-            .register("/serviceWorker.js")
+            .register("/serviceWorker.js", { updateViaCache: "none" })
             .then((result) => console.log(result))
             .catch(e => console.error(e))
     })
