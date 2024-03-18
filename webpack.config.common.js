@@ -13,7 +13,7 @@ module.exports = {
         filename: (pathdata)=>  pathdata.chunk.name === "serviceWorker" ? "[name].js" : "[name].[contenthash].js",
         publicPath: "/",
         clean: true,
-        assetModuleFilename: "assets/[name][hash][ext]",
+        assetModuleFilename: "assets/[name][ext]",
     },
     module: {
         rules: [
